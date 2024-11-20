@@ -21,7 +21,7 @@ const PostList = ({ posts, fetchPosts, setCurrentPost }) => {
       <div className="max-w-4xl mx-auto">
         <h2 className="text-3xl font-bold mb-6 text-center">Post List</h2>
         {posts.length === 0 ? (
-          <p className="text-center text-gray-400">No posts available.</p>
+          <p className="text-center text-gray-400">Loading...</p>
         ) : (
           <div className="space-y-6">
             {posts.map((post) => (
