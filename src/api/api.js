@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://blogserver-eight.vercel.app/api",
+  baseURL: "https://server-fawn-five.vercel.app/api",
 });
 
 // Add JWT token to requests izf available
