@@ -100,7 +100,7 @@ function ShoppingHome() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prevSlide) => (prevSlide + 1) % featureImageList.length);
-    }, 15000);
+    }, 2500);
 
     return () => clearInterval(timer);
   }, [featureImageList]);
@@ -114,7 +114,7 @@ function ShoppingHome() {
     );
   }, [dispatch]);
 
-  console.log(productList, "productList");
+  
 
   useEffect(() => {
     dispatch(getFeatureImages());

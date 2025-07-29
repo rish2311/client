@@ -9,10 +9,15 @@ const initialState = {
 export const addReview = createAsyncThunk(
   "/order/addReview",
   async (formdata) => {
+    console.log(formdata)
     const response = await axios.post(
       `http://localhost:5000/api/shop/review/add`,
-      formdata
+      formdata,
+      {
+        withCredentials: true,
+      }
     );
+    console.log(response)
 
     return response.data;
   }
@@ -20,7 +25,10 @@ export const addReview = createAsyncThunk(
 
 export const getReviews = createAsyncThunk("/order/getReviews", async (id) => {
   const response = await axios.get(
-    `http://localhost:5000/api/shop/review/${id}`
+    `http://localhost:5000/api/shop/review/${id}`,
+    {
+      withCredentials: true,
+    }
   );
 
   return response.data;
@@ -32,6 +40,15 @@ const reviewSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(addReview.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(addReview.fulfilled, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(addReview.rejected, (state) => {
+        state.isLoading = false;
+      })
       .addCase(getReviews.pending, (state) => {
         state.isLoading = true;
       })

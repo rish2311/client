@@ -1,10 +1,24 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-
+("");
 const initialState = {
   isLoading: false,
-  featureImageList: [],
+  featureImageList: [
+    {
+      image: "https://cmsimages.shoppersstop.com/Levis_web_2d724aab25/Levis_web_2d724aab25.png",
+    },
+    {
+      image: "https://cmsimages.shoppersstop.com/Puma_web_fd5eb32ca8/Puma_web_fd5eb32ca8.png",
+    },
+    {
+      image: "https://cmsimages.shoppersstop.com/static_web_d107367fe0/static_web_d107367fe0.png",
+    },
+    {
+      image: "https://cmsimages.shoppersstop.com/women_western_main_web_3564434e7b/women_western_main_web_3564434e7b.png",
+    },
+  ],
 };
+
 
 export const getFeatureImages = createAsyncThunk(
   "/order/getFeatureImages",
@@ -40,11 +54,48 @@ const commonSlice = createSlice({
       })
       .addCase(getFeatureImages.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.featureImageList = action.payload.data;
+        
+
+        state.featureImageList = [
+          // {
+          //   image:
+          //     "https://assets.ajio.com/cms/AJIO/WEB/D-FCS-WHP-1.0-S2-TOPBANNER-P1-5090-24072025.jpg",
+          // },
+          {
+            image:
+              "https://cmsimages.shoppersstop.com/Levis_web_2d724aab25/Levis_web_2d724aab25.png",
+          },
+          {
+            image:
+              "https://cmsimages.shoppersstop.com/Puma_web_fd5eb32ca8/Puma_web_fd5eb32ca8.png",
+          },
+          {
+            image:
+              "https://cmsimages.shoppersstop.com/static_web_d107367fe0/static_web_d107367fe0.png",
+          },
+          {
+            image:
+              "https://cmsimages.shoppersstop.com/women_western_main_web_3564434e7b/women_western_main_web_3564434e7b.png",
+          },
+        ];
       })
       .addCase(getFeatureImages.rejected, (state) => {
         state.isLoading = false;
-        state.featureImageList = [];
+
+        state.featureImageList = [
+          {
+            image: "https://cmsimages.shoppersstop.com/Levis_web_2d724aab25/Levis_web_2d724aab25.png",
+          },
+          {
+            image: "https://cmsimages.shoppersstop.com/Puma_web_fd5eb32ca8/Puma_web_fd5eb32ca8.png",
+          },
+          {
+            image: "https://cmsimages.shoppersstop.com/static_web_d107367fe0/static_web_d107367fe0.png",
+          },
+          {
+            image: "https://cmsimages.shoppersstop.com/women_western_main_web_3564434e7b/women_western_main_web_3564434e7b.png",
+          },
+        ];
       });
   },
 });

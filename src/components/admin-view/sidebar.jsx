@@ -7,6 +7,7 @@ import {
 import { Fragment } from "react";
 import { useNavigate } from "react-router-dom";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "../ui/sheet";
+import PropTypes from "prop-types";
 
 const adminSidebarMenuItems = [
   {
@@ -51,6 +52,10 @@ function MenuItems({ setOpen }) {
   );
 }
 
+MenuItems.propTypes = {
+  setOpen: PropTypes.func,
+};
+
 function AdminSideBar({ open, setOpen }) {
   const navigate = useNavigate();
 
@@ -82,5 +87,10 @@ function AdminSideBar({ open, setOpen }) {
     </Fragment>
   );
 }
+
+AdminSideBar.propTypes = {
+  open: PropTypes.bool,
+  setOpen: PropTypes.func,
+};
 
 export default AdminSideBar;

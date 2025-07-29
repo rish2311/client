@@ -15,15 +15,16 @@ function ProductImageUpload({
   setImageLoadingState,
   isEditMode,
   isCustomStyling = false,
+  uploadLabel = "Upload Image",
 }) {
   const inputRef = useRef(null);
 
-  console.log(isEditMode, "isEditMode");
+  
 
   function handleImageFileChange(event) {
-    console.log(event.target.files, "event.target.files");
+    
     const selectedFile = event.target.files?.[0];
-    console.log(selectedFile);
+
 
     if (selectedFile) setImageFile(selectedFile);
   }
@@ -53,7 +54,7 @@ function ProductImageUpload({
       "http://localhost:5000/api/admin/products/upload-image",
       data
     );
-    console.log(response, "response");
+
 
     if (response?.data?.success) {
       setUploadedImageUrl(response.data.result.url);
@@ -69,7 +70,7 @@ function ProductImageUpload({
     <div
       className={`w-full  mt-4 ${isCustomStyling ? "" : "max-w-md mx-auto"}`}
     >
-      <Label className="text-lg font-semibold mb-2 block">Upload Image</Label>
+      <Label className="text-lg font-semibold mb-2 block">{uploadLabel}</Label>
       <div
         onDragOver={handleDragOver}
         onDrop={handleDrop}

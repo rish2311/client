@@ -5,12 +5,13 @@ const initialState = {
   isLoading: false,
   productList: [],
   productDetails: null,
+  error: null,
 };
 
 export const fetchAllFilteredProducts = createAsyncThunk(
   "/products/fetchAllProducts",
   async ({ filterParams, sortParams }) => {
-    console.log(fetchAllFilteredProducts, "fetchAllFilteredProducts");
+    
 
     const query = new URLSearchParams({
       ...filterParams,
@@ -21,7 +22,7 @@ export const fetchAllFilteredProducts = createAsyncThunk(
       `http://localhost:5000/api/shop/products/get?${query}`
     );
 
-    console.log(result);
+    
 
     return result?.data;
   }
@@ -50,25 +51,31 @@ const shoppingProductSlice = createSlice({
     builder
       .addCase(fetchAllFilteredProducts.pending, (state, action) => {
         state.isLoading = true;
+        state.error = null;
       })
       .addCase(fetchAllFilteredProducts.fulfilled, (state, action) => {
         state.isLoading = false;
         state.productList = action.payload.data;
+        state.error = null;
       })
       .addCase(fetchAllFilteredProducts.rejected, (state, action) => {
         state.isLoading = false;
         state.productList = [];
+        state.error = action.error.message || "Failed to fetch products";
       })
       .addCase(fetchProductDetails.pending, (state, action) => {
         state.isLoading = true;
+        state.error = null;
       })
       .addCase(fetchProductDetails.fulfilled, (state, action) => {
         state.isLoading = false;
         state.productDetails = action.payload.data;
+        state.error = null;
       })
       .addCase(fetchProductDetails.rejected, (state, action) => {
         state.isLoading = false;
         state.productDetails = null;
+        state.error = action.error.message || "Failed to fetch product details";
       });
   },
 });

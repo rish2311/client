@@ -1,5 +1,6 @@
 import { Button } from "../ui/button";
 import { Card, CardContent, CardFooter } from "../ui/card";
+import PropTypes from "prop-types";
 
 function AdminProductTile({
   product,
@@ -26,10 +27,10 @@ function AdminProductTile({
                 product?.salePrice > 0 ? "line-through" : ""
               } text-lg font-semibold text-primary`}
             >
-              ${product?.price}
+              ₹{product?.price}
             </span>
             {product?.salePrice > 0 ? (
-              <span className="text-lg font-bold">${product?.salePrice}</span>
+              <span className="text-lg font-bold">₹{product?.salePrice}</span>
             ) : null}
           </div>
         </CardContent>
@@ -49,5 +50,19 @@ function AdminProductTile({
     </Card>
   );
 }
+
+AdminProductTile.propTypes = {
+  product: PropTypes.shape({
+    _id: PropTypes.string,
+    image: PropTypes.string,
+    title: PropTypes.string,
+    price: PropTypes.number,
+    salePrice: PropTypes.number,
+  }),
+  setFormData: PropTypes.func.isRequired,
+  setOpenCreateProductsDialog: PropTypes.func.isRequired,
+  setCurrentEditedId: PropTypes.func.isRequired,
+  handleDelete: PropTypes.func.isRequired,
+};
 
 export default AdminProductTile;
